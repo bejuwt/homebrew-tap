@@ -9,13 +9,18 @@ cask "pingviewscan" do
 
   app "PingViewScan.app"
 
+  # The app is ad-hoc signed and not notarized. Homebrew always applies the
+  # quarantine flag (the old `--no-quarantine` option was removed), so clear it
+  # here to avoid the "cannot verify ... is free of malware" Gatekeeper block.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/PingViewScan.app"]
+  end
+
   caveats <<~EOS
-    PingViewScan is ad-hoc signed and not notarized, so macOS Gatekeeper
-    blocks it on first launch. Install without quarantine to skip the prompt:
-
-      brew install --cask --no-quarantine bejuwt/tap/pingviewscan
-
-    Or, after a normal install, clear the flag once:
+    PingViewScan is ad-hoc signed and not notarized, so macOS Gatekeeper blocks
+    it on first launch. This cask clears the quarantine flag for you, so it
+    should open normally. If it is ever re-quarantined, run:
 
       xattr -dr com.apple.quarantine "/Applications/PingViewScan.app"
   EOS
