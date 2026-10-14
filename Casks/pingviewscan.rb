@@ -1,6 +1,6 @@
 cask "pingviewscan" do
-  version "1.1.0"
-  sha256 "b414028acddac82ae21ab51213885cbd9d342730f2dbb6ecc4aa55af8cda7825"
+  version "1.2.0"
+  sha256 "5056287d58ca214f4020e317b95812ad08588e13e6bea60c4908d34d1ac1fa0a"
 
   url "https://github.com/bejuwt/pingviewscan/releases/download/v#{version}/PingViewScan-macOS.zip"
   name "PingViewScan"
